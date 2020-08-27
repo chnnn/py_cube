@@ -1,0 +1,30 @@
+9 movement, if no middle then 6.
+    Each rotation changes the position
+    *use wiki page notation
+    Front Back Up Down Left Right, default clockwise, ' counter-clockwise, _2 180 degree.
+    F B U D L R
+
+-------------------------
+Position is necessary to determine if a layer is changed.
+    Each block have a 3d xyz coordinate
+    Each block have a position(direction) attribute. Corner have 3, edge have 2, middle block have 1(different if cube have direction instead of color)
+    But blocks are connected, so there are few less positions than 3*2 * 8 * 2*2 * 12 * 6 = 13824 possibilities.
+    How to represent the relationships?
+    If use the 20 depth inference, 3 moves(clock counterclock 180)*9 action-> 3^9=19683 possibility. means any problem could be solved within 19683 moves. though low efficiency.
+
+How to find solution?
+    1.knows that the corner block is adjustable without effecting the edge block.
+    2.infer that the rule holds for upper layers.
+
+So in our case, we can generate (3*6)*(3*6-1)^(n-1) moves, then check if bottom is the same.<F11>
+---------------------------------
+Jan 12: add Group Theory permutation denotations.
+    From Left to Right, (1,2,4)(3)(5)*(3,1)(4,2)=(1,4,3)(2)(5)
+
+    Theorem: The Cube always has even parity. 
+    It says that it means that hence there's no move that will exchange a single pair of cubies. 
+    
+    Thinks: 
+        to simplify, consider 2x2. a movement 
+        F(2x2) = (FLU, FRU, FRD, FLD)=(FLU, FRU)(FLU, FRD)(FLU, FLD)
+        so in 2x2 each movement is odd.
